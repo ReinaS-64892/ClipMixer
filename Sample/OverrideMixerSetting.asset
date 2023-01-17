@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2444c46328f127a42b4da27dd2f8fe1f, type: 3}
   m_Name: OverrideMixerSetting
   m_EditorClassIdentifier: 
-  SourceClipsPath: Assets/Rs/ClipBaseData/Clips
-  OverrideClipsPath: Assets/Rs/ClipBaseData/override
-  OutputPath: Assets/Rs/Fioretta/Animation/FX/clip
+  SourceClipsPath: Assets/Editor/ClipMixer/Sample/Clips
+  OverrideClipsPath: Assets/Editor/ClipMixer/Sample/override
+  OutputPath: Assets/Editor/ClipMixer/Sample
