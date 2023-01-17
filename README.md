@@ -14,3 +14,5 @@ Select the folder containing each animation clip from the Select button and pres
 
 #
 Only one so far, sorry! I may add more, depending on the mood of the author.
+
+This text was translated by Deepl.
