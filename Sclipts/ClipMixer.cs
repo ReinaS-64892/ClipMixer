@@ -8,7 +8,39 @@ namespace Rs.ClipMixer
 {
     public class ClipMixer
     {
-        public static void OverrideMixer(OverrideMixer cms)
+        public static void ClipMixingFromSetting(ClipMixerSetting ClipMixerSetting)
+        {
+            Dictionary<string, AnimationClip> OutputAniClips = new Dictionary<string, AnimationClip>();
+            foreach (var clipMixisingData in ClipMixerSetting.MixisingList)
+            {
+
+                var aniclip = ClipListMix(clipMixisingData.MixClips);
+                var outputpaht = clipMixisingData.GetFullPath();
+
+                OutputAniClips.Add(outputpaht, aniclip);
+            }
+            SaveAniClips(OutputAniClips);
+        }
+        public static AnimationClip ClipListMix(List<AnimationClip> MixClips)
+        {
+            if (MixClips.Count == 0) throw new System.ArgumentNullException("MixClips Is Null!");
+
+            AnimationClip OutPutClip = new AnimationClip();
+            if (MixClips[0] != null)
+            {
+                var firstClipSettings = AnimationUtility.GetAnimationClipSettings(MixClips[0]);
+                AnimationUtility.SetAnimationClipSettings(OutPutClip, firstClipSettings);
+            }
+            foreach (var clip in MixClips)
+            {
+                if (clip == null) continue;
+                MixClip(ref OutPutClip, clip);
+            }
+
+            return OutPutClip;
+
+        }
+        public static void OverrideMixerFromSetting(OverrideMixer cms)
         {
             var OverrideClipDict = ToTagPeaClips(FiltalingExtension(Directory.EnumerateFiles(cms.OverrideClipsPath), ".anim"));
 
@@ -54,13 +86,15 @@ namespace Rs.ClipMixer
         }
         public static AnimationClip MixClipToTag(Dictionary<char, AnimationClip> OverideTagPeaClip, string SourceOvrrideTags, AnimationClip SourceClip)
         {
-            var Aniclip = new AnimationClip();
+            var OutputAniclip = new AnimationClip();
+            var SourceClipSetting = AnimationUtility.GetAnimationClipSettings(SourceClip);
+            AnimationUtility.SetAnimationClipSettings(OutputAniclip, SourceClipSetting);
 
             foreach (char Tag in SourceOvrrideTags)
             {
                 if (OverideTagPeaClip.ContainsKey(Tag))
                 {
-                    MixClip(ref Aniclip, OverideTagPeaClip[Tag]);
+                    MixClip(ref OutputAniclip, OverideTagPeaClip[Tag]);
                 }
                 else
                 {
@@ -68,9 +102,9 @@ namespace Rs.ClipMixer
                 }
             }
 
-            MixClip(ref Aniclip, SourceClip);
+            MixClip(ref OutputAniclip, SourceClip);
 
-            return Aniclip;
+            return OutputAniclip;
         }
         public static void MixClip(ref AnimationClip Base, AnimationClip mix)
         {
@@ -112,5 +146,10 @@ namespace Rs.ClipMixer
         public string ExprotClipName;
         public string ExprotPath;
         public List<AnimationClip> MixClips;
+
+        public string GetFullPath()
+        {
+            return ExprotPath +"/"+ ExprotClipName;
+        }
     }
 }

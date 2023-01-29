@@ -21,7 +21,7 @@ namespace Rs.ClipMixer
 
             if (GUILayout.Button("Mixer execution!!"))
             {
-                //それらを後で書く
+                ClipMixer.ClipMixingFromSetting(mytarget);
             }
 
             var PropMixisingList = serializedObject.FindProperty("MixisingList");

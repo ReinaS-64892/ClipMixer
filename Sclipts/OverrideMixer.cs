@@ -78,7 +78,7 @@ namespace Rs.ClipMixer
 
             if (GUILayout.Button("ClipMix!!"))
             {
-                ClipMixer.OverrideMixer(mytarget);
+                ClipMixer.OverrideMixerFromSetting(mytarget);
             }
 
 
