@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Rs.ClipMixer
 {
 
-    [CreateAssetMenu(fileName = "OverrideMixerSetting", menuName = "OverrideMixerSetting")]
+    [CreateAssetMenu(fileName = "OverrideMixerSetting", menuName = "ClipMixer/OverrideMixerSetting")]
     public class OverrideMixer : ScriptableObject
     {
         public string SourceClipsPath;

@@ -45,8 +45,6 @@ namespace Rs.ClipMixer
             return Maths;
 
         }
-
-
         public static void SaveAniClips(Dictionary<string, AnimationClip> SaveClips)
         {
             foreach (var kvp in SaveClips)
@@ -54,9 +52,6 @@ namespace Rs.ClipMixer
                 AssetDatabase.CreateAsset(kvp.Value, kvp.Key);
             }
         }
-
-
-
         public static AnimationClip MixClipToTag(Dictionary<char, AnimationClip> OverideTagPeaClip, string SourceOvrrideTags, AnimationClip SourceClip)
         {
             var Aniclip = new AnimationClip();
@@ -77,7 +72,6 @@ namespace Rs.ClipMixer
 
             return Aniclip;
         }
-
         public static void MixClip(ref AnimationClip Base, AnimationClip mix)
         {
             var MixBinds = AnimationUtility.GetCurveBindings(mix);
@@ -88,12 +82,10 @@ namespace Rs.ClipMixer
             }
 
         }
-
         public static string TagListUp(string path)
         {
             return Path.GetFileNameWithoutExtension(path).Split('_')[0];
         }
-
         public static Dictionary<char, AnimationClip> ToTagPeaClips(IEnumerable<string> ClipPaths)
         {
             Dictionary<char, AnimationClip> TagPeaClips = new Dictionary<char, AnimationClip>();
@@ -114,4 +106,11 @@ namespace Rs.ClipMixer
 
     }
 
+    [System.Serializable]
+    public struct ClipMixisingData
+    {
+        public string ExprotClipName;
+        public string ExprotPath;
+        public List<AnimationClip> MixClips;
+    }
 }
