@@ -21,6 +21,7 @@ MonoBehaviour:
     ExprotPath: Assets/Editor/ClipMixer/Sample
     MixClips:
     - {fileID: 0}
+    - {fileID: 0}
   - ExprotClipName: nya.anim
     ExprotPath: Assets/Editor/ClipMixer/Sample
     MixClips:

@@ -79,9 +79,26 @@ namespace Rs.ClipMixer
         }
         public static void SaveAniClips(Dictionary<string, AnimationClip> SaveClips)
         {
+
+
             foreach (var kvp in SaveClips)
             {
-                AssetDatabase.CreateAsset(kvp.Value, kvp.Key);
+                SaveAsset(kvp.Key,kvp.Value,typeof(AnimationClip),false);
+            }
+            AssetDatabase.SaveAssets();
+
+        }
+        public static void SaveAsset(string path, Object SaveAsset, System.Type type,bool SaveAssetFlag = true)
+        {
+            var loadasset = AssetDatabase.LoadAssetAtPath(path, type);
+            if (loadasset == null)
+            {
+                AssetDatabase.CreateAsset(SaveAsset,path);
+            }
+            else
+            {
+                EditorUtility.CopySerialized(SaveAsset,loadasset);
+                if(SaveAssetFlag) AssetDatabase.SaveAssets();
             }
         }
         public static AnimationClip MixClipToTag(Dictionary<char, AnimationClip> OverideTagPeaClip, string SourceOvrrideTags, AnimationClip SourceClip)
@@ -149,7 +166,7 @@ namespace Rs.ClipMixer
 
         public string GetFullPath()
         {
-            return ExprotPath +"/"+ ExprotClipName;
+            return ExprotPath + "/" + ExprotClipName;
         }
     }
 }
